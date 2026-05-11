@@ -1,0 +1,24 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace WpfApp.ViewModels
+{
+    public abstract class ViewModelBase : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(name));
+        }
+
+        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string name = null)
+        {
+            if (object.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(name);
+            return true;
+        }
+    }
+}
