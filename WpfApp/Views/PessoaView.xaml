@@ -91,6 +91,7 @@
 
         <Label Grid.Row="5" Content="Pedidos da Pessoa selecionada:" FontWeight="Bold" Margin="0,0,0,4"/>
 
+        <!-- Grid de pedidos da pessoa -->
         <DataGrid Grid.Row="6"
                   ItemsSource="{Binding PedidosDaPessoa}"
                   AutoGenerateColumns="False"

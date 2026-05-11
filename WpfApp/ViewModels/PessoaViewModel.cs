@@ -88,6 +88,7 @@ namespace WpfApp.ViewModels
             _filtroPedidoSelecionado = OpcoesFiltroPedido[0];
 
             CarregarTodas();
+            PessoaSelecionada = Pessoas.FirstOrDefault();
 
             IncluirCommand = new RelayCommand(o => Incluir());
             EditarCommand = new RelayCommand(o => Editar(), () => PessoaSelecionada != null);
