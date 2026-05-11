@@ -102,6 +102,12 @@
             <Setter Property="GridLinesVisibility" Value="Horizontal"/>
             <Setter Property="RowHeight" Value="26"/>
             <Setter Property="AlternatingRowBackground" Value="#FAFAFA"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="CanUserResizeColumns" Value="False"/>
+            <Setter Property="CanUserSortColumns" Value="False"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
         </Style>
 
         <!-- Barra de botões no rodapé -->

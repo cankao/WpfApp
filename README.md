@@ -129,14 +129,20 @@ basta apagá-los.
 
 ### Pessoas (aba 1)
 - Filtros: **Nome** e **CPF** (com debounce de 300ms).
-- Grid com todas as pessoas; seleção carrega os pedidos abaixo.
+- Grid com todas as pessoas; ao abrir a aba a **primeira pessoa é
+  selecionada automaticamente**, já carregando seus pedidos abaixo.
+- Mudar a seleção atualiza tanto o painel de edição quanto a lista de
+  pedidos da pessoa.
 - Ações: **Incluir**, **Editar**, **Salvar**, **Excluir**.
 - Botão **Incluir Pedido**: navega para a aba *Pedidos* já com a pessoa
   selecionada.
-- Filtros sobre os pedidos da pessoa: apenas pendentes de pagamento,
-  apenas pagos, apenas entregues (recebidos).
-- Grid de pedidos da pessoa com colunas: Data, Valor Total, Forma de
-  Pagamento, Status — e por linha: **Pago**, **Enviado**, **Recebido**.
+- Filtros sobre os pedidos da pessoa: todos / apenas pendentes de
+  pagamento / apenas pagos / apenas entregues (recebidos).
+- Grid de pedidos da pessoa com colunas: ID, Data Venda, Valor Total,
+  Forma Pagamento, Dt. Pagto, Status — e por linha as ações **Pago /
+  Não pago**, **Enviado** e **Recebido**.
+- Cores das linhas: verde quando pago, vermelho quando enviado/recebido
+  sem pagamento registrado.
 
 ### Produtos (aba 2)
 - Filtros: **Nome**, **Código** e **faixa de valor** (de / até).
@@ -145,11 +151,16 @@ basta apagá-los.
 
 ### Pedidos (aba 3)
 - Seleção de **Pessoa**.
-- Adição de múltiplos produtos com quantidades (botão **Adicionar**).
+- Adição de múltiplos produtos com quantidades (botão **Adicionar**);
+  adicionar um produto já existente no pedido soma à quantidade existente.
+- Botão **Remover** por item na grid de itens do pedido.
 - Cálculo automático do **Valor Total** após cada inclusão/remoção.
 - Seleção da **Forma de Pagamento**.
-- Botão **Finalizar**: valida, calcula total, salva e bloqueia edição.
-- Listagem à direita com todos os pedidos cadastrados (somente leitura).
+- Botão **Novo Pedido** descarta o rascunho atual e começa outro.
+- Botão **Finalizar**: valida (pessoa selecionada, pelo menos um item,
+  quantidades > 0), calcula total, salva e bloqueia a edição.
+- Listagem à direita com todos os pedidos cadastrados (somente leitura),
+  colunas: ID, Pessoa, Data, Total, Pagamento, Dt. Pagto, Status.
 
 ## Decisões técnicas
 
@@ -161,6 +172,10 @@ basta apagá-los.
   pedidos históricos.
 - Validação de **CPF** com algoritmo dos dígitos verificadores; duplicidade
   comparada pelos 11 dígitos (independente da formatação).
+- Estilo global de `DataGrid` em `App.xaml` aplicado a todas as listas:
+  colunas não reordenáveis, não redimensionáveis e não ordenáveis;
+  barra de rolagem vertical sempre visível (horizontal sob demanda);
+  cabeçalho fixo no topo durante rolagem (comportamento padrão do WPF).
 
 ## Limitações conhecidas
 

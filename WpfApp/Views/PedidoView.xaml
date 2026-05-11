@@ -8,7 +8,7 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Grid.Column="0" Header="Novo Pedido">
+        <GroupBox Grid.Column="0" Header="Novo Pedido" Margin="0,0,25,8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -93,7 +93,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
 
- 
+
                 <Grid Grid.Row="4" Margin="0,4,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="130"/>
@@ -112,7 +112,7 @@
                               Text="{Binding PedidoAtual.ValorTotal, StringFormat=R$ {0:N2}, Mode=OneWay}"/>
                 </Grid>
 
-                  <Grid Grid.Row="5" Margin="0,4,0,0">
+                <Grid Grid.Row="5" Margin="0,4,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="130"/>
                         <ColumnDefinition Width="*"/>
@@ -135,16 +135,16 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Column="2" Header="Pedidos Cadastrados">
+        <GroupBox Grid.Column="1" Header="Pedidos Cadastrados" Grid.ColumnSpan="2" Margin="5,0,0,8">
             <DataGrid ItemsSource="{Binding Pedidos}"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"
                       SelectionMode="Single"
                       Margin="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID"         Binding="{Binding Id}"                                          Width="50"/>
-                    <DataGridTextColumn Header="Pessoa"     Binding="{Binding PessoaNome}"                                  Width="*"/>
-                    <DataGridTextColumn Header="Data"       Binding="{Binding DataVenda, StringFormat=dd/MM/yyyy HH:mm}"    Width="130"/>
+                    <DataGridTextColumn Header="ID"         Binding="{Binding Id}"                                          Width="30"/>
+                    <DataGridTextColumn Header="Pessoa"     Binding="{Binding PessoaNome}"                                  Width="160"/>
+                    <DataGridTextColumn Header="Data"       Binding="{Binding DataVenda, StringFormat=dd/MM/yyyy HH:mm}"    Width="110"/>
                     <DataGridTextColumn Header="Total"      Binding="{Binding ValorTotal, StringFormat=R$ {0:N2}}"          Width="110"/>
                     <DataGridTextColumn Header="Pagamento"  Binding="{Binding FormaPagamento}"                              Width="110"/>
                     <DataGridTextColumn Header="Dt. Pagto"  Binding="{Binding DataPagamento, StringFormat=dd/MM/yyyy}" Width="130"/>
