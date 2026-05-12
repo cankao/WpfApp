@@ -129,11 +129,19 @@ basta apagá-los.
 
 ### Pessoas (aba 1)
 - Filtros: **Nome** e **CPF** (com debounce de 300ms).
-- Grid com todas as pessoas; ao abrir a aba a **primeira pessoa é
-  selecionada automaticamente**, já carregando seus pedidos abaixo.
+- Ao abrir a aba a tela é **recarregada**: filtros zerados, lista
+  recarregada e a **primeira pessoa selecionada automaticamente**.
 - Mudar a seleção atualiza tanto o painel de edição quanto a lista de
   pedidos da pessoa.
-- Ações: **Incluir**, **Editar**, **Salvar**, **Excluir**.
+- **Modo de edição** controla os campos e os botões:
+  - **Visualização** (pessoa selecionada): campos travados; somente
+    **Incluir** e **Editar** habilitados.
+  - **Edição** (após **Incluir** ou **Editar**): campos liberados, exceto
+    **ID**; somente **Salvar** habilitado.
+  - Trocar de pessoa no grid ou trocar de aba descarta as alterações em
+    edição.
+- Botão **Excluir** está atualmente desabilitado (decisão de UX — pode
+  voltar mediante ajuste do `CanExecute`).
 - Botão **Incluir Pedido**: navega para a aba *Pedidos* já com a pessoa
   selecionada.
 - Filtros sobre os pedidos da pessoa: todos / apenas pendentes de
