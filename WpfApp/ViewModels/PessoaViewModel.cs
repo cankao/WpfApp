@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using WpfApp.Models;
 using WpfApp.Services;
 
@@ -26,7 +27,19 @@ namespace WpfApp.ViewModels
                 {
                     CopiarParaEdicao(value);
                     CarregarPedidosDaPessoa();
+                    EmModoEdicao = false;
                 }
+            }
+        }
+
+        private bool _emModoEdicao;
+        public bool EmModoEdicao
+        {
+            get { return _emModoEdicao; }
+            set
+            {
+                if (SetProperty(ref _emModoEdicao, value))
+                    CommandManager.InvalidateRequerySuggested();
             }
         }
 
@@ -90,10 +103,10 @@ namespace WpfApp.ViewModels
             CarregarTodas();
             PessoaSelecionada = Pessoas.FirstOrDefault();
 
-            IncluirCommand = new RelayCommand(o => Incluir());
-            EditarCommand = new RelayCommand(o => Editar(), () => PessoaSelecionada != null);
-            SalvarCommand = new RelayCommand(o => Salvar());
-            ExcluirCommand = new RelayCommand(o => Excluir(), () => PessoaSelecionada != null);
+            IncluirCommand = new RelayCommand(o => Incluir(), () => !EmModoEdicao);
+            EditarCommand = new RelayCommand(o => Editar(), () => !EmModoEdicao && PessoaSelecionada != null);
+            SalvarCommand = new RelayCommand(o => Salvar(), () => EmModoEdicao);
+            ExcluirCommand = new RelayCommand(o => Excluir(), () => false);
             IncluirPedidoCommand = new RelayCommand(o => IncluirPedido(), () => PessoaSelecionada != null);
             MarcarPagoCommand = new RelayCommand(p => AlternarPago(p as Pedido));
             MarcarEnviadoCommand = new RelayCommand(p => AlterarStatus(p as Pedido, StatusPedido.Enviado));
@@ -132,20 +145,24 @@ namespace WpfApp.ViewModels
         {
             PessoaSelecionada = null;
             EmEdicao = new Pessoa();
+            EmModoEdicao = true;
         }
 
         private void Editar()
         {
             CopiarParaEdicao(PessoaSelecionada);
+            EmModoEdicao = true;
         }
 
         private void Salvar()
         {
             try
             {
-                if (EmEdicao.Id == 0)
+                var idSalvo = EmEdicao.Id;
+                if (idSalvo == 0)
                 {
                     _pessoaService.Add(EmEdicao);
+                    idSalvo = EmEdicao.Id;
                     MessageBox.Show("Pessoa cadastrada com sucesso.", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
@@ -154,7 +171,8 @@ namespace WpfApp.ViewModels
                     MessageBox.Show("Pessoa atualizada com sucesso.", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 CarregarTodas();
-                EmEdicao = new Pessoa();
+                PessoaSelecionada = Pessoas.FirstOrDefault(p => p.Id == idSalvo);
+                EmModoEdicao = false;
             }
             catch (Exception ex)
             {

@@ -42,12 +42,17 @@
                 <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ReadOnlyTextBox}"
                          Text="{Binding EmEdicao.Id, Mode=OneWay}"/>
                 <Label  Grid.Row="0" Grid.Column="2" Content="Nome:"/>
-                <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding EmEdicao.Nome, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="0" Grid.Column="3"
+                         IsEnabled="{Binding EmModoEdicao}"
+                         Text="{Binding EmEdicao.Nome, UpdateSourceTrigger=PropertyChanged}"/>
                 <Label  Grid.Row="0" Grid.Column="4" Content="CPF:"/>
-                <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding EmEdicao.Cpf, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="0" Grid.Column="5"
+                         IsEnabled="{Binding EmModoEdicao}"
+                         Text="{Binding EmEdicao.Cpf, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label  Grid.Row="1" Grid.Column="0" Content="Endereço:"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
+                         IsEnabled="{Binding EmModoEdicao}"
                          Text="{Binding EmEdicao.Endereco, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </GroupBox>
