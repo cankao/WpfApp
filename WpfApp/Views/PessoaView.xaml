@@ -7,10 +7,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="2*" MinHeight="200"/>
+            <RowDefinition Height="130"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" MinHeight="140"/>
+            <RowDefinition Height="*" MinHeight="220"/>
         </Grid.RowDefinitions>
 
         <GroupBox Grid.Row="0" Header="Filtros">
@@ -38,19 +37,19 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label  Grid.Row="0" Grid.Column="0" Content="ID:"/>
+                <Label  Grid.Row="0" Grid.Column="0" Content="ID:"   HorizontalContentAlignment="Right"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Style="{StaticResource ReadOnlyTextBox}"
                          Text="{Binding EmEdicao.Id, Mode=OneWay}"/>
-                <Label  Grid.Row="0" Grid.Column="2" Content="Nome:"/>
+                <Label  Grid.Row="0" Grid.Column="2" Content="Nome:" HorizontalContentAlignment="Right"/>
                 <TextBox Grid.Row="0" Grid.Column="3"
                          IsEnabled="{Binding EmModoEdicao}"
                          Text="{Binding EmEdicao.Nome, UpdateSourceTrigger=PropertyChanged}"/>
-                <Label  Grid.Row="0" Grid.Column="4" Content="CPF:"/>
+                <Label  Grid.Row="0" Grid.Column="4" Content="CPF:"  HorizontalContentAlignment="Right"/>
                 <TextBox Grid.Row="0" Grid.Column="5"
                          IsEnabled="{Binding EmModoEdicao}"
                          Text="{Binding EmEdicao.Cpf, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Label  Grid.Row="1" Grid.Column="0" Content="Endereço:"/>
+                <Label  Grid.Row="1" Grid.Column="0" Content="Endereço:" HorizontalContentAlignment="Right"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5"
                          IsEnabled="{Binding EmModoEdicao}"
                          Text="{Binding EmEdicao.Endereco, UpdateSourceTrigger=PropertyChanged}"/>
@@ -84,24 +83,31 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <GroupBox Grid.Row="4" Header="Pedidos da Pessoa - Filtros">
-            <StackPanel Orientation="Horizontal">
-                <Label    Content="Status:" Width="60"/>
-                <ComboBox Width="260"
-                          ItemsSource="{Binding OpcoesFiltroPedido}"
-                          SelectedItem="{Binding FiltroPedidoSelecionado}"
-                          DisplayMemberPath="Texto"/>
-            </StackPanel>
-        </GroupBox>
+        <Grid Grid.Row="4" Margin="0,4,0,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="260"/>
+            </Grid.ColumnDefinitions>
+            <Label    Grid.Column="0" Content="Pedidos da Pessoa selecionada:" FontWeight="Bold"/>
+            <Label    Grid.Column="2" Content="Filtro:" Margin="12,0,4,0"/>
+            <ComboBox Grid.Column="3"
+                      ItemsSource="{Binding OpcoesFiltroPedido}"
+                      SelectedItem="{Binding FiltroPedidoSelecionado}"
+                      DisplayMemberPath="Texto"/>
+        </Grid>
 
-        <Label Grid.Row="5" Content="Pedidos da Pessoa selecionada:" FontWeight="Bold" Margin="0,0,0,4"/>
-
-        <!-- Grid de pedidos da pessoa -->
-        <DataGrid Grid.Row="6"
+        <DataGrid Grid.Row="5"
                   ItemsSource="{Binding PedidosDaPessoa}"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
-                  SelectionMode="Single">
+                  SelectionMode="Single"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  ScrollViewer.CanContentScroll="True"
+                  VirtualizingPanel.IsVirtualizing="True"
+                  VirtualizingPanel.VirtualizationMode="Recycling">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>

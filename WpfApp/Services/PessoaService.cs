@@ -5,16 +5,9 @@ using WpfApp.Models;
 
 namespace WpfApp.Services
 {
-    public class PessoaService
+    public class PessoaService : ServiceBase<Pessoa>
     {
-        private readonly JsonRepository<Pessoa> _repo;
-        private List<Pessoa> _cache;
-
-        public PessoaService()
-        {
-            _repo = new JsonRepository<Pessoa>("pessoas.json");
-            _cache = _repo.Load();
-        }
+        public PessoaService() : base("pessoas.json") { }
 
         public IEnumerable<Pessoa> GetAll()
         {

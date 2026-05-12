@@ -5,16 +5,9 @@ using WpfApp.Models;
 
 namespace WpfApp.Services
 {
-    public class PedidoService
+    public class PedidoService : ServiceBase<Pedido>
     {
-        private readonly JsonRepository<Pedido> _repo;
-        private List<Pedido> _cache;
-
-        public PedidoService()
-        {
-            _repo = new JsonRepository<Pedido>("pedidos.json");
-            _cache = _repo.Load();
-        }
+        public PedidoService() : base("pedidos.json") { }
 
         public IEnumerable<Pedido> GetAll()
         {

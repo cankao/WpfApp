@@ -71,6 +71,7 @@
     <Compile Include="Models\StatusPedido.cs" />
     <Compile Include="Services\CpfValidator.cs" />
     <Compile Include="Services\JsonRepository.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\PedidoService.cs" />
     <Compile Include="Services\PessoaService.cs" />
     <Compile Include="Services\ProdutoService.cs" />
