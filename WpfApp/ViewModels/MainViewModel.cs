@@ -12,7 +12,11 @@ namespace WpfApp.ViewModels
         public int SelectedTabIndex
         {
             get { return _selectedTabIndex; }
-            set { SetProperty(ref _selectedTabIndex, value); }
+            set
+            {
+                if (SetProperty(ref _selectedTabIndex, value) && value == 0 && PessoaVM != null)
+                    PessoaVM.RecarregarTela();
+            }
         }
 
         public MainViewModel()

@@ -262,6 +262,18 @@ namespace WpfApp.ViewModels
         {
             CarregarPedidosDaPessoa();
         }
+
+        public void RecarregarTela()
+        {
+            EmModoEdicao = false;
+            PessoaSelecionada = null;
+            _filtroNome = null;
+            _filtroCpf = null;
+            OnPropertyChanged("FiltroNome");
+            OnPropertyChanged("FiltroCpf");
+            CarregarTodas();
+            PessoaSelecionada = Pessoas.FirstOrDefault();
+        }
     }
 
     public class FiltroPedidoOpcao
